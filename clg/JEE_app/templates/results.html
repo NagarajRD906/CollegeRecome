@@ -1,0 +1,41 @@
+{% extends 'homepage.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-top:30px">
+  <div class="row">
+      <div class="column">
+          <div class="card shadow" style="border-radius: 15px;margin: 50px;">
+              <div class="card-header py-3" style="background: #12343b;margin: 0px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                  <p class="m-0 fw-bold" style="color: #d9d9d9;">The below are the college lists for respective CRITERIA<p style="color: #d9d9d9; margin-bottom: -10px;">Gender: {{ values.0.3 }} | Branch: {{ values.0.6 }} | Caste: {{ values.0.4 }}</p></p>
+                </div>
+
+
+                <div class="card-body" style="background: white;margin: 0px;border-radius: 15px;">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <th scope="col">2024 Cutoff Rank</th>
+                                  <th scope="col">2023 Cutoff Rank</th>
+                                  <th scope="col">College</th>
+                                  <th scope="col">College Code</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for i in values %}
+                                <tr>
+                                  <td>{{ i.1 }}</td>
+                                  <td>{{ i.2 }}</td>
+                                  <td><a href="{% url 'college_branch' i.0 %}" onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="color:#000;text-decoration:none;">{{ i.0 }}</a></td>
+                                  <td>{{ i.7 }}</td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock content %}

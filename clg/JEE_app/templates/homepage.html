@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Online College Recommender</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="{% static 'css/Responsive-Form-1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Responsive-Form.css' %}">
+    <link rel="shortcut icon" href="{% static 'img/hahaha.png' %}">
+    <style>
+        .navbar-brand.logo {
+            color: #ffffff;
+            font-size: 18px;
+        }
+        .dropdown-toggle::after {
+            display: none;
+        }
+        .dropdown-menu {
+            background-color: #fffff;
+        }
+        .dropdown-item {
+            color: #43464B;
+        }
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            background-color: #12343b;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            }
+        }
+        
+        .profile-icon:hover {
+            background-color: #2d545e;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container">
+            <a class="navbar-brand logo" href="{% url 'home' %}">College Recommendation Based On JEE Rank</a>
+            <div class="navbar-nav mx-auto">
+                <a href="{% url 'colleges_link' %}" class="nav-link" style="color:white;text-decoration: none;">College Details</a>
+                <span class="nav-link" style="color: white;">-</span>
+                <a href="{% url 'colleges' %}" class="nav-link" style="color:white;text-decoration: none;">College Branch List</a>
+            </div>
+            <div class="profile-icon">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page landing-page">
+        {% block content %}
+            <p class="m-0 fw-bold" style="color: #ffffff;">{{ Name }}</p>
+            <a href="{% url 'colleges_link' %}"></a>
+        {% endblock content %}
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><p>Developed By:</p>Nagaraj R D</div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
+</body>
+
+</html>

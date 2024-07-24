@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Colleges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #c89666; /* Gradient background */
+            color: #43464B; /* Text color changed to metallic black */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure the content covers the entire viewport */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000; /* Search Colleges text color changed to black */
+            animation: colorChange 2s infinite alternate; /* Continuous animation */
+        }
+        @keyframes colorChange {
+            0% {
+                color: #fff; /* Start with black color */
+            }
+            50% {
+                color: #c89666; /* Change to pink color */
+            }
+            100% {
+                color: #fff; /* Back to black color */
+            }
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 4px;
+            border: 1px solid #fff; /* Input border color */
+            animation: slideIn 1s ease-out;
+            color: #43464B; /* Metallic black text color */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        li {
+            padding: 10px;
+            border: 1px solid #2d545e; /* List item border color */
+            margin-bottom: 5px;
+            cursor: pointer;
+            background-color: #fff5d7; /* Pink background */
+            border-radius: 4px;
+            color: #000; /* Text color for options changed to white */
+            transition: background-color 0.3s, transform 0.3s;
+            animation: fadeIn 1s ease-out;
+        }
+        li:hover {
+            background-color: #e1b382; /* Darker pink on hover */
+            transform: scale(1.05);
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Search Colleges</h2> <!-- Search Colleges header text with continuous animation -->
+        <input type="text" id="searchInput" placeholder="Type college name...">
+        <ul id="results"></ul>
+    </div>
+
+    <script>
+        // Updated college data
+        const colleges = [
+        { name: "IIT Bhubaneswar", link: "https://www.iitbbs.ac.in/" },
+        { name: "IIT Bombay", link: "https://www.iitb.ac.in/" },
+        { name: "IIT Mandi", link: "https://www.iitmandi.ac.in/" },
+        { name: "IIT Delhi", link: "https://home.iitd.ac.in/" },
+        { name: "IIT Indore", link: "https://www.iiti.ac.in/" },
+        { name: "IIT Kharagpur", link: "https://www.iitkgp.ac.in/" },
+        { name: "IIT Hyderabad", link: "https://iith.ac.in/" },
+        { name: "IIT Jodhpur", link: "https://iitj.ac.in/" },
+        { name: "IIT Kanpur", link: "https://www.iitk.ac.in/" },
+        { name: "IIT Madras", link: "https://study.iitm.ac.in/ds/" },
+        { name: "IIT Gandhinagar", link: "https://iitgn.ac.in/" },
+        { name: "IIT Patna", link: "https://www.iitp.ac.in/" },
+        { name: "IIT Roorkee", link: "https://www.iitr.ac.in/" },
+        { name: "IIT (ISM) Dhanbad", link: "https://www.iitism.ac.in/" },
+        { name: "IIT Ropar", link: "https://www.iitrpr.ac.in/" },
+        { name: "IIT (BHU) Varanasi", link: "https://iitbhu.ac.in/" },
+        { name: "IIT Guwahati", link: "https://www.iitg.ac.in/" },
+        { name: "IIT Bhilai", link: "https://iitbhilai.ac.in/" },
+        { name: "IIT Goa", link: "https://iitgoa.ac.in/" },
+        { name: "IIT Palakkad", link: "https://iitpkd.ac.in/" },
+        { name: "IIT Tirupati", link: "https://iittp.ac.in/" },
+        { name: "IIT Jammu", link: "https://www.iitjammu.ac.in/" },
+        { name: "IIT Dharwad", link: "https://iitdh.ac.in/" },
+        { name: "Dr. B R Ambedkar NIT Jalandhar", link: "https://www.nitj.ac.in/" },
+        { name: "Malaviya NIT Jaipur", link: "https://mnit.ac.in/" },
+        { name: "Maulana Azad NIT Bhopal", link: "https://www.manit.ac.in/" },
+        { name: "Motilal Nehru NIT Allahabad", link: "http://www.mnnit.ac.in/" },
+        { name: "NIT Agartala", link: "https://nita.ac.in/" },
+        { name: "NIT Calicut", link: "https://nitc.ac.in/" },
+        { name: "NIT Delhi", link: "https://nitdelhi.ac.in/" },
+        { name: "NIT Durgapur", link: "https://nitdgp.ac.in/" },
+        { name: "NIT Goa", link: "https://nitgoa.ac.in/" },
+        { name: "NIT Hamirpur", link: "https://nith.ac.in/" },
+        { name: "NIT Karnataka Surathkal", link: "https://www.nitk.ac.in/" },
+        { name: "NIT Meghalaya", link: "https://www.nitm.ac.in/" },
+        { name: "NIT Nagaland", link: "https://www.nitnagaland.ac.in/" },
+        { name: "NIT Patna", link: "https://www.nitp.ac.in/" },
+        { name: "NIT Puducherry", link: "https://www.nitpy.ac.in/" },
+        { name: "NIT Raipur", link: "https://nitrr.ac.in/" },
+        { name: "NIT Sikkim", link: "https://nitsikkim.ac.in/" },
+        { name: "NIT Arunachal Pradesh", link: "https://www.nitap.ac.in/" },
+        { name: "NIT Jamshedpur", link: "https://nitjsr.ac.in/" },
+        { name: "NIT Kurukshetra", link: "https://nitkkr.ac.in/" },
+        { name: "NIT Manipur", link: "https://nitmanipur.ac.in/" },
+        { name: "NIT Mizoram", link: "https://nitmz.ac.in/" },
+        { name: "NIT Rourkela", link: "https://nitrkl.ac.in/" },
+        { name: "NIT Silchar", link: "http://www.nits.ac.in/" },
+        { name: "NIT Srinagar", link: "https://www.nitsri.ac.in/" },
+        { name: "NIT Tiruchirappalli", link: "https://www.nitt.edu/" },
+        { name: "NIT Uttarakhand", link: "https://www.nituk.ac.in/" },
+        { name: "NIT Warangal", link: "https://nitw.ac.in/main/" },
+        { name: "Sardar Vallabhbhai NIT Surat", link: "https://www.svnit.ac.in/" },
+        { name: "Visvesvaraya NIT Nagpur", link: "https://vnit.ac.in/" },
+        { name: "NIT Andhra Pradesh", link: "https://nitandhra.ac.in/main/" },
+        { name: "Indian Institute of Engineering Science and Technology Shibpur", link: "https://www.iiests.ac.in/" },
+        { name: "Atal Bihari Vajpayee IIIT & Management Gwalior", link: "https://www.iiitm.ac.in/index.php/en/" },
+        { name: "IIIT Kota Rajasthan", link: "https://iiitkota.ac.in/" },
+        { name: "IIIT Guwahati", link: "https://www.iiitg.ac.in/" },
+        { name: "IIIT Kalyani West Bengal", link: "https://iiitkalyani.ac.in/" },
+        { name: "IIIT Kilohrad Sonepat Haryana", link: "https://iiitsonepat.ac.in/" },
+        { name: "IIIT Una Himachal Pradesh", link: "https://iiitu.ac.in/" },
+        { name: "IIIT Sri City Chittoor", link: "https://www.iiits.ac.in/" },
+        { name: "IIIT Vadodara Gujrat", link: "https://iiitvadodara.ac.in/" },
+        { name: "IIIT Allahabad", link: "https://www.iiita.ac.in/" },
+        { name: "IIIT Design & Manufacturing Kancheepuram", link: "https://www.iiitdm.ac.in/" },
+        { name: "Pt. Dwarka Prasad Mishra IIIT Design & Manufacture Jabalpur", link: "https://iiitdmj.ac.in/" },
+        { name: "IIIT Manipur", link: "http://www.iiitmanipur.ac.in/" },
+        { name: "IIIT Tiruchirappalli", link: "http://www.iiitt.ac.in/" },
+        { name: "IIIT Lucknow", link: "https://iiitl.ac.in/" },
+        { name: "IIIT Dharwad", link: "https://www.iiitdwd.ac.in/" },
+        { name: "IIIT Design & Manufacturing Kurnool Andhra Pradesh", link: "https://www.iiitk.ac.in/" },
+        { name: "IIIT Kottayam", link: "https://www.iiitkottayam.ac.in/#!/home" },
+        { name: "IIIT Ranchi", link: "https://iiitranchi.ac.in/" },
+        { name: "IIIT Nagpur", link: "https://iiitn.ac.in/" },
+        { name: "IIIT Pune", link: "https://iiitp.ac.in/" },
+        { name: "IIIT Bhagalpur", link: "https://iiitbh.ac.in/" },
+        { name: "IIIT Bhopal", link: "https://iiitbhopal.ac.in/#!/" },
+        { name: "IIIT Surat", link: "https://www.iiitsurat.ac.in/" },
+        { name: "IIIT Agartala", link: "https://iiitagartala.ac.in/" },
+        { name: "IIIT Raichur Karnataka", link: "https://iiitr.ac.in/" },
+        { name: "IIIT Vadodara International Campus Diu IIITVICD", link: "http://diu.iiitvadodara.ac.in/" },
+        { name: "Assam University Silchar", link: "http://www.aus.ac.in/" },
+        { name: "BIT Mesra Ranchi", link: "https://www.bitmesra.ac.in/bit" },
+        { name: "Gurukula Kangri Vishwavidyalaya Haridwar", link: "https://www.gkv.ac.in/" },
+        { name: "Indian Institute of Carpet Technology Bhadohi", link: "https://iict.ac.in/" },
+        { name: "Institute of Infrastructure Technology Research and Management Ahmedabad", link: "https://www.iitram.ac.in/" },
+        { name: "IT Guru Ghasidas Vishwavidyalaya (A Central University) Bilaspur (C.G.)", link: "https://ggu.ac.in/" },
+        { name: "J.K. Institute of Applied Physics & Technology Department of Electronics & Communication University of Allahabad Allahabad", link: "https://www.jkinstitute.ac.in/" },
+        { name: "National Institute of Electronics and Information Technology Aurangabad Maharashtra", link: "https://www.nielit.gov.in/aurangabad/index.php" },
+        { name: "National Institute of Advanced Manufacturing Technology Ranchi", link: "https://niamt.ac.in/" },
+        { name: "Sant Longowal Institute of Engineering and Technology", link: "http://sliet.ac.in/" },
+        { name: "Mizoram University Aizawl", link: "https://mzu.edu.in/" },
+        { name: "School of Engineering Tezpur University Napaam Tezpur", link: "https://www.tezu.ernet.in/soe/" },
+        { name: "School of Planning & Architecture Bhopal", link: "https://spabhopal.ac.in/Home.aspx" },
+        { name: "School of Planning & Architecture New Delhi", link: "https://spa.ac.in/" },
+        { name: "School of Planning & Architecture Vijayawada", link: "https://spav.ac.in/" },
+        { name: "Shri Mata Vaishno Devi University Katra Jammu & Kashmir", link: "https://smvdu.ac.in/" },
+        { name: "IIIT Naya Raipur", link: "https://www.iiitnr.ac.in/" },
+        { name: "University of Hyderabad", link: "https://uohyd.ac.in/" },
+        { name: "Jawaharlal Nehru University Delhi", link: "https://www.jnu.ac.in/main/" },
+        { name: "IIIT Bhubaneswar", link: "https://www.iiit-bh.ac.in/" },
+        { name: "Central IT Kokrajar Assam", link: "https://cit.ac.in/institute-about" },
+        { name: "Puducherry Technological University Puducherry", link: "https://ptuniv.edu.in/" },
+        { name: "Ghani Khan Choudhary Institute of Engineering and Technology Malda West Bengal", link: "https://www.gkciet.ac.in/" },
+        { name: "Central University of Rajasthan Rajasthan", link: "https://curaj.ac.in/" },
+        { name: "National Institute of Food Technology Entrepreneurship and Management Kundli", link: "https://niftem.ac.in/newsite/" },
+        { name: "National Institute of Food Technology Entrepreneurship and Management Thanjavur", link: "https://niftem-t.ac.in/" },
+        { name: "North Eastern Regional Institute of Science and Technology Nirjuli 791109 Itanagar Arunachal Pradesh", link: "https://nerist.ac.in/contact" },
+        { name: "IIHT Varanasi", link: "https://www.iihtvaranasi.edu.in/" },
+        { name: "Chhattisgarh Swami Vivekanada Technical University Bhilai CSVTU Bhilai", link: "https://csvtu.ac.in/" },
+        { name: "Institute of Chemical Technology Mumbai Indian Oil Odisha Campus Bhubaneswar", link: "https://iocb.ictmumbai.edu.in/" },
+        { name: "North-Eastern Hill University Shillong", link: "https://nehu.ac.in/" },
+        { name: "Central University of Jammu", link: "https://cujammu.ac.in/" },
+        { name: "Institute of Engineering and Technology Dr. H. S. Gour University. Sagar A Central University", link: "https://dhsgsu.edu.in/index.php/en/departments01/institute-of-engineering-and-technology" },
+        { name: "Central University of Haryana", link: "https://www.cuh.ac.in/" },
+        { name: "BIT Deoghar Off-Campus", link: "https://www.bitmesra.ac.in/BIT_Mesra?cid=4&pid=H" },
+        { name: "BIT Patna Off-Campus", link: "https://www.bitmesra.ac.in/BIT_Mesra?cid=8&pid=H" },
+        { name: "IIHT Salem", link: "https://www.iihtsalem.edu.in/" }
+        ];
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const resultsList = document.getElementById('results');
+
+        // Function to filter colleges based on input
+        function filterColleges(event) {
+            const query = event.target.value.toLowerCase();
+            const filteredColleges = colleges.filter(college => {
+                return college.name.toLowerCase().includes(query);
+            });
+
+            displayResults(filteredColleges);
+        }
+
+        // Function to display filtered results
+        function displayResults(filteredColleges) {
+            resultsList.innerHTML = '';
+            filteredColleges.forEach(college => {
+                const li = document.createElement('li');
+                li.textContent = college.name;
+                li.addEventListener('click', () => {
+                    window.location.href = college.link;
+                });
+                resultsList.appendChild(li);
+            });
+        }
+
+        // Event listener for input changes
+        searchInput.addEventListener('input', filterColleges);
+    </script>
+</body>
+</html>

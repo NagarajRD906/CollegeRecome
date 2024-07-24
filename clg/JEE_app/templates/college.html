@@ -1,0 +1,49 @@
+{% extends 'homepage.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid" style="margin-top:30px">
+     <div class="row">
+         <div class="column">
+             <div class="card shadow" style="border-radius: 15px;margin: 50px;">
+                 <div class="card-header py-3" style="background: #bf4aa8;margin: -1px;border-top-left-radius: 15px;border-top-right-radius: 15px;">
+                    <p class="m-0 fw-bold" style="color: #d9d9d9;">The Below Are The Branches Available at {{ Name }} College<br>Please Select Your Required Branch</p>
+                </div>
+
+                <div class="card-body" style="background: white;margin: 0px;border-radius: 15px;">
+                    <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+
+
+                              <th scope="col">Branch</th>
+      
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for i in branches %}
+                            <tr>
+
+
+                              <td><a href="{% url 'cbs' Name i %}" onMouseOver="this.style.color='blue'" onMouseOut="this.style.color='black'" style="color:#000;text-decoration:none;">{{ i }}</a></td>
+
+                            </tr>
+                            {% endfor %}
+
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock content %}
