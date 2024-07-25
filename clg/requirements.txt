@@ -189,3 +189,6 @@ zope.hookable==6.0
 zope.interface==6.2
 zope.lifecycleevent==5.0
 zope.proxy==5.2
+Django==4.2
+djangorestframework==3.14.0
+psycopg2-binary==2.9.6
