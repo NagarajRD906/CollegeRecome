@@ -94,6 +94,7 @@ opt-einsum==3.3.0
 optional-django==0.1.0
 optree==0.10.0
 outcome==1.3.0.post0
+pip==24.1.2
 packaging==24.1
 pandas==2.2.2
 parso==0.8.3
@@ -144,7 +145,7 @@ seaborn==0.13.2
 see==1.4.1
 segno==1.6.1
 selenium==4.18.1
-setuptools==70.0.0
+setuptools
 six==1.16.0
 sniffio==1.3.0
 sortedcontainers==2.4.0
@@ -174,7 +175,7 @@ virtualenv==20.25.1
 wcwidth==0.2.13
 webencodings==0.5.1
 Werkzeug==3.0.1
-wheel==0.43.0
+wheel
 whitenoise==5.2.0
 wikipedia==1.4.0
 wrapt==1.16.0
