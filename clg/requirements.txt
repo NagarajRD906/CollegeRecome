@@ -67,7 +67,6 @@ kivy-deps.glew==0.3.1
 kivy-deps.sdl2==0.7.0
 Kivy-Garden==0.1.5
 kivymd==1.2.0
-kivy-deps.angle==0.4.0
 kiwisolver==1.4.5
 libclang==18.1.1
 Markdown==3.3.4
@@ -156,6 +155,7 @@ soupsieve==2.5
 SpeechRecognition==3.8.1
 sqlparse==0.4.1
 stack-data==0.6.3
+style==1.1.0
 sudo==1.0.0
 tabulate==0.8.9
 tasks==2.8.0
@@ -171,6 +171,7 @@ trio==0.24.0
 trio-websocket==0.11.1
 typing_extensions==4.9.0
 tzdata==2024.1
+update==0.0.1
 urllib3==1.25.11
 virtualenv==20.25.1
 wcwidth==0.2.13
@@ -189,6 +190,3 @@ zope.hookable==6.0
 zope.interface==6.2
 zope.lifecycleevent==5.0
 zope.proxy==5.2
-Django==4.2
-djangorestframework==3.14.0
-psycopg2-binary==2.9.6
